@@ -1,8 +1,8 @@
-import { registerApplication, start as startSpa } from 'single-spa';
-import { importEntry, setGlobalExcludes } from './import-html-entry';
+import { registerApplication, start as startSpa } from 'single-spa'
+import { importEntry, setGlobalExcludes } from './import-html-entry'
 
 interface AppObject {
-  name: string
+  name: string;
   entry: string;
   render (arg: {appContent: string; loading: boolean}): void;
   activeRule: (location: Location) => boolean;
@@ -10,23 +10,23 @@ interface AppObject {
 
 export const setExcludes = setGlobalExcludes
 
-export function registerMicroApp(app: AppObject) {
+export function registerMicroApp (app: AppObject) {
   const {
     name,
     entry,
     render,
     activeRule,
-  } = app;
+  } = app
 
   const appRender = async () => {
-    render({ appContent: '', loading: true });
-    const { template, execScripts } = await importEntry(entry);
+    render({ appContent: '', loading: true })
+    const { template, execScripts } = await importEntry(entry)
     const appContent = template
-    await execScripts();
+    await execScripts()
 
     return {
       bootstrap: [
-        async () => console.log('bootstrap app')
+        async () => console.log('bootstrap app'),
       ],
       mount: [
         async () => render({ appContent, loading: false }),
@@ -34,12 +34,12 @@ export function registerMicroApp(app: AppObject) {
       unmount: [
         async () => render({ appContent: '', loading: false }),
       ],
-    };
+    }
   }
 
-  registerApplication(name, appRender,activeRule);
+  registerApplication(name, appRender, activeRule)
 }
 
-export function start() {
-  startSpa();
+export function start () {
+  startSpa()
 }

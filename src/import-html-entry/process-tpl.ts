@@ -1,18 +1,17 @@
-import { getInlineCode, resolvePath } from './utils';
+import { getInlineCode, resolvePath } from './utils'
 
-const ALL_SCRIPT_REGEX = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi;
-const SCRIPT_TAG_REGEX = /<(script)\s+((?!type=('|')text\/ng-template\3).)*?>.*?<\/\1>/i;
-const SCRIPT_SRC_REGEX = /.*\ssrc=('|")(\S+)\1.*/;
-const LINK_TAG_REGEX = /<(link)\s+.*?>/gi;
-const STYLE_TYPE_REGEX = /\s+rel=("|')stylesheet\1.*/;
-const STYLE_HREF_REGEX = /.*\shref=('|")(\S+)\1.*/;
-const HTML_COMMENT_REGEX = /<!--([\s\S]*?)-->/g;
+const ALL_SCRIPT_REGEX = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi
+const SCRIPT_TAG_REGEX = /<(script)\s+((?!type=('|')text\/ng-template\3).)*?>.*?<\/\1>/i
+const SCRIPT_SRC_REGEX = /.*\ssrc=('|")(\S+)\1.*/
+const LINK_TAG_REGEX = /<(link)\s+.*?>/gi
+const STYLE_TYPE_REGEX = /\s+rel=("|')stylesheet\1.*/
+const STYLE_HREF_REGEX = /.*\shref=('|")(\S+)\1.*/
+const HTML_COMMENT_REGEX = /<!--([\s\S]*?)-->/g
 
 
-
-export const genLinkReplaceSymbol = (linkHref: string) => `<!-- link ${linkHref} replaced by import-html-entry -->`;
-export const genScriptReplaceSymbol = (scriptSrc: string) => `<!-- script ${scriptSrc} replaced by import-html-entry -->`;
-export const inlineScriptReplaceSymbol = `<!-- inline scripts replaced by import-html-entry -->`;
+export const genLinkReplaceSymbol = (linkHref: string) => `<!-- link ${linkHref} replaced by import-html-entry -->`
+export const genScriptReplaceSymbol = (scriptSrc: string) => `<!-- script ${scriptSrc} replaced by import-html-entry -->`
+export const inlineScriptReplaceSymbol = '<!-- inline scripts replaced by import-html-entry -->'
 
 /**
  * parse the script link from the template
@@ -26,73 +25,70 @@ export const inlineScriptReplaceSymbol = `<!-- inline scripts replaced by import
  * @stripStyles whether to strip the css links
  * @returns {{template: void | string | *, scripts: *[], entry: *}}
  */
-export default function processTpl(tpl: string, entryUrl: string) {
+export default function processTpl (tpl: string, entryUrl: string) {
+  let scripts: string[] = []
+  const styles: string[] = []
 
-	let scripts: Array<string> = [];
-	const styles: Array<string> = [];
+  const template = tpl
 
-	const template = tpl
-
-		/*
+    /*
 		remove html comment first
 		*/
-		.replace(HTML_COMMENT_REGEX, '')
-		.replace(LINK_TAG_REGEX, match => {
-			/*
+    .replace(HTML_COMMENT_REGEX, '')
+    .replace(LINK_TAG_REGEX, match => {
+      /*
 			change the css link
 			*/
-			const styleType = !!match.match(STYLE_TYPE_REGEX);
-			if (styleType) {
+      const styleType = !!match.match(STYLE_TYPE_REGEX)
+      if (styleType) {
+        const styleHref = match.match(STYLE_HREF_REGEX)
+        if (styleHref) {
+          const href = styleHref && styleHref[2]
+          const newHref = resolvePath(href, entryUrl)
 
-				const styleHref = match.match(STYLE_HREF_REGEX);
-				if (styleHref) {
-					const href = styleHref && styleHref[2];
-					let newHref = resolvePath(href, entryUrl);
+          styles.push(newHref)
+          return genLinkReplaceSymbol(newHref)
+        }
+      }
 
-					styles.push(newHref);
-					return genLinkReplaceSymbol(newHref);
-				}
-			}
+      return match
+    })
+    .replace(ALL_SCRIPT_REGEX, match => {
+      // in order to keep the exec order of all javascripts
+      // if it is a external script
+      if (SCRIPT_TAG_REGEX.test(match)) {
+        const matchedScriptSrcMatch = match.match(SCRIPT_SRC_REGEX)
+        let matchedScriptSrc = matchedScriptSrcMatch && matchedScriptSrcMatch[2]
+        if (matchedScriptSrc) {
+          matchedScriptSrc = resolvePath(matchedScriptSrc, entryUrl)
+          scripts.push(matchedScriptSrc)
+          return genScriptReplaceSymbol(matchedScriptSrc)
+        }
 
-			return match;
-		})
-		.replace(ALL_SCRIPT_REGEX, match => {
+        return match
+      } else {
+        // if it is an inline script
+        const code = getInlineCode(match)
 
-			// in order to keep the exec order of all javascripts
-			// if it is a external script
-			if (SCRIPT_TAG_REGEX.test(match)) {
-				const matchedScriptSrcMatch = match.match(SCRIPT_SRC_REGEX);
-				let matchedScriptSrc = matchedScriptSrcMatch && matchedScriptSrcMatch[2];
-				if (matchedScriptSrc) {
-					matchedScriptSrc = resolvePath(matchedScriptSrc, entryUrl)
-					scripts.push(matchedScriptSrc);
-					return genScriptReplaceSymbol(matchedScriptSrc);
-				}
+        // remove script blocks when all of these lines are comments.
+        const isPureCommentBlock = code.split(/[\r\n]+/).every(line => !line.trim() || line.trim().startsWith('//'))
 
-				return match;
-			} else {
-				// if it is an inline script
-				const code = getInlineCode(match);
+        if (!isPureCommentBlock) {
+          scripts.push(match)
+        }
 
-				// remove script blocks when all of these lines are comments.
-				const isPureCommentBlock = code.split(/[\r\n]+/).every(line => !line.trim() || line.trim().startsWith('//'));
+        return inlineScriptReplaceSymbol
+      }
+    })
 
-				if (!isPureCommentBlock) {
-					scripts.push(match);
-				}
+  scripts = scripts.filter(function (script) {
+    // filter empty script
+    return !!script
+  })
 
-				return inlineScriptReplaceSymbol;
-			}
-		});
-
-	scripts = scripts.filter(function (script) {
-		// filter empty script
-		return !!script;
-	});
-
-	return {
-		template,
-		scripts,
-		styles,
-	};
+  return {
+    template,
+    scripts,
+    styles,
+  }
 }

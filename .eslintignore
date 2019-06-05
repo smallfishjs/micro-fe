@@ -1,0 +1,7 @@
+.git/
+dist
+coverage
+report
+**/*.min.js
+node_modules/
+test/
