@@ -1,8 +1,9 @@
 {
-  "name": "smallfish-gate",
+  "name": "smallfish-mf",
   "version": "0.0.1",
   "description": "",
   "main": "./lib/index.js",
+  "files": ["src", "lib"],
   "scripts": {
     "start": "npm run start:main & npm run start:react & npm run start:vue",
     "install:example": "cd example/main && npm i && cd ../vue && npm i && cd ../react && npm i",

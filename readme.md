@@ -29,7 +29,6 @@ Interface AppObj {
 
 ```
 # it will listen the ports of 8080, 9000, 9001
-npm i
 npm run install:example
 npm start
 ```
