@@ -8,11 +8,12 @@
     "lib"
   ],
   "scripts": {
-    "start": "npm run start:main & npm run start:react & npm run start:vue",
-    "install:example": "cd example/main && npm i && cd ../vue && npm i && cd ../react && npm i",
+    "start": "npm run start:main & npm run start:react & npm run start:vue & npm run start:smallfish",
+    "install:example": "cd example/main && npm i && cd ../vue && npm i && cd ../react && npm i && cd ../smallfish && npm i",
     "start:react": "cd example/react && npm run dev",
     "start:vue": "cd example/vue && npm run dev",
     "start:main": "cd example/main && npm run dev",
+    "start:smallfish": "cd example/smallfish && npm run dev",
     "lint": "eslint 'src/**/*.ts' --fix",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",

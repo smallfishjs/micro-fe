@@ -5,3 +5,4 @@ report
 **/*.min.js
 node_modules/
 test/
+example

@@ -22,6 +22,9 @@ document.getElementById('react').onclick = () => {
   gotoLink('react', '/react')
 }
 
+document.getElementById('smallfish').onclick = () => {
+  gotoLink('smallfish', '/smallfish')
+}
 
 function genActiveRule(routerPrefix) {
   return (location) => location.pathname.startsWith(routerPrefix);
@@ -43,10 +46,13 @@ registerMicroApp({
   entry: '//0.0.0.0:9001/index.html',
   render,
   activeRule: genActiveRule('/react'),
-  execScripts: [
-    /register/
-  ]
 });
 
+registerMicroApp({
+  name: 'smallfish app',
+  entry: '//0.0.0.0:7001/index.html',
+  render,
+  activeRule: genActiveRule('/smallfish'),
+});
 
 start();

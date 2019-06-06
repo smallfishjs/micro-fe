@@ -6,11 +6,22 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/document-register-element/1.13.0/document-register-element.js"></script>
+  <style>
+    #nav {
+      position:absolute;
+      z-index: 10;
+      background-color: #FFF;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-  <ul>
+  <ul id="nav">
     <li id="vue">vue</li>
     <li id="react">react</li>
+    <li id="smallfish">smallfish</li>
   </ul>
   <div id="container" style="height: 500px"></div>
 </body>

@@ -1,0 +1,24 @@
+{
+  "name": "smallfish-boilerplates-management-system",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "smallfish dev",
+    "dev": "smallfish dev",
+    "devs": "smallfish dev --no-mock",
+    "test": "smallfish test",
+    "cov": "smallfish cov",
+    "build": "smallfish build",
+    "pack": "smallfish pack",
+    "help": "smallfish help",
+    "version": "smallfish -v",
+    "lint": "smallfish lint --style",
+    "precommit": "smallfish lint --staged --prettier --style --fix",
+    "ci": "smallfish lint --style && smallfish cov"
+  },
+  "dependencies": {
+    "smallfish": "^0.1.6"
+  },
+  "engines": {
+    "install-node": "10"
+  }
+}
