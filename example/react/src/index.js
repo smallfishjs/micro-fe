@@ -1,4 +1,4 @@
-__webpack_public_path__ = "http://0.0.0.0:9001/"
+__webpack_public_path__ = "http://localhost:9001/"
 
 import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom";

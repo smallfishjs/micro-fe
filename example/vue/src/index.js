@@ -1,4 +1,4 @@
-__webpack_public_path__ = "http://0.0.0.0:9000/"
+__webpack_public_path__ = "http://localhost:9000/"
 
 import Vue from 'vue'
 import App from './view'
