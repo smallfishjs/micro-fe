@@ -23,7 +23,7 @@
     "cross-env": "^5.2.0",
     "html-webpack-plugin": "^3.2.0",
     "single-spa": "^4.3.4",
-    "smallfish-gate": "0.0.1",
+    "smallfish-mf": "0.0.1",
     "webpack": "^4.32.2",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.3.2",

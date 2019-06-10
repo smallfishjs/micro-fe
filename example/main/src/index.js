@@ -3,7 +3,7 @@ import 'core-js/features/promise'
 import 'core-js/features/string'
 import 'regenerator-runtime/runtime'
 
-import { registerMicroApp, start, setExcludes } from 'smallfish-gate';
+import { registerMicroApp, start, setExcludes } from 'smallfish-mf';
 
 function render({ appContent, loading }) {
   const container = document.getElementById('container');

@@ -1,18 +1,18 @@
 ## smallfish-fe
 
-English | [中文](./README_zh-CN.md)
+[English](./README.md) | 中文
 
-Both microservices and micro-frontends are expected to transform a single application into multiple aggregates of services or applications that can be independently operated, independently developed, independently deployed, and independently maintained to meet the rapid changes in business and distributed. The need for team parallel development. Smallfish-mf is one of the micro frontend solutions. The core is to encapsulate multiple subApps into the same portal project by encapsulating subApps into custom elements. As a micro-frontend solution for smallfish, it provides smallfish-plugin-mf support, which can easily convert smallfish applications into subApps that meet the requirements of smallfish-mf.
+
+微服务与微前端，都是希望将某个单一的单体应用，转化为多个可以独立运行、独立开发、独立部署、独立维护的服务或者应用的聚合，从而满足业务快速变化及分布式多团队并行开发的需求。smallfish-mf是微前端的解决方案之一，核心是通过将子应用封装成custom element，以方便多个子应用集成在同一个portal项目中。作为smallfish的微服务解决方案，提供了smallfish-plugin-mf支持，可以方便的将smallfish应用转换为符合smallfish-mf要求的子应用
 
 ## Feature
 
-+ SubApp technology independence. Independent development, independent deployment, independent operation，independently maintained
-+ Style isolation
-+ Multi-instance support
-+ Public dependency loading
-+ Lazy load
-+ smallfish-plugin-mf support
-
++ 子应用技术无关性。独立开发，独立部署，独立运行，独立维护
++ 样式隔离
++ 多实例支持
++ 公共依赖加载
++ 按需加载
++ smallfish-plugin-mf 支持
 
 ## Install && Usage
 
