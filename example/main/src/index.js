@@ -36,21 +36,21 @@ setExcludes([
 
 registerMicroApp({
   name: 'vue app',
-  entry: '//0.0.0.0:9000/index.html',
+  entry: '//localhost:9000/index.html',
   render,
   activeRule: genActiveRule('/vue'),
 });
 
 registerMicroApp({
   name: 'react app',
-  entry: '//0.0.0.0:9001/index.html',
+  entry: '//localhost:9001/index.html',
   render,
   activeRule: genActiveRule('/react'),
 });
 
 registerMicroApp({
   name: 'smallfish app',
-  entry: '//0.0.0.0:7001/index.html',
+  entry: '//localhost:7001/index.html',
   render,
   activeRule: genActiveRule('/smallfish'),
 });
