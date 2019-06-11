@@ -132,7 +132,7 @@ module.exports = (env, argv) => {
       historyApiFallback: true,
       contentBase: './',
       stats: 'errors-only',
-      host: '0.0.0.0',
+      host: 'localhost',
       port: '9000',
       headers: {
         "Access-Control-Allow-Origin": "*",

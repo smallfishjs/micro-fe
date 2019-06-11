@@ -61,7 +61,7 @@ module.exports = (env, argv) => {
     devServer: {
       historyApiFallback: true,
       hot: true,
-      host: '0.0.0.0',
+      host: 'localhost',
       port: '8080',
       contentBase: './',
       stats: 'errors-only',
