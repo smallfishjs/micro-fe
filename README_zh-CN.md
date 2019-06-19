@@ -1,4 +1,4 @@
-## smallfish-fe
+## smallfish-mf
 
 [English](./README.md) | 中文
 
