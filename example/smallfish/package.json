@@ -16,7 +16,10 @@
     "ci": "smallfish lint --style && smallfish cov"
   },
   "dependencies": {
-    "smallfish": "^0.1.6"
+    "@quickbaseoss/babel-plugin-styled-components-css-namespace": "^1.0.0-rc2",
+    "add": "^2.0.6",
+    "smallfish": "^0.1.9",
+    "yarn": "^1.16.0"
   },
   "engines": {
     "install-node": "10"

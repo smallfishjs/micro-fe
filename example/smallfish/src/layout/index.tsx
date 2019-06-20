@@ -1,13 +1,13 @@
-import React, { useState } from 'smallfish/react';
-import { withRouter } from 'smallfish/router';
-import { Layout, Menu, Icon } from 'smallfish/antd';
-import { Link } from 'smallfish/router';
-import styled from 'smallfish/styled';
+import React, { useState } from "smallfish/react";
+import { withRouter } from "smallfish/router";
+import { Layout, Menu, Icon } from "smallfish/antd";
+import { Link } from "smallfish/router";
+import styled from "smallfish/styled";
 
 const MLayout = styled(Layout)`
   position: fixed;
   top: 0;
-  bottom: 0
+  bottom: 0;
   left: 0;
   right: 0;
 `;
@@ -21,11 +21,11 @@ const Logo = styled.h1`
   color: #fff;
   margin: 0;
   font-size: 24px;
-  padding-left: ${props => (props.center ? '0' : '24px')};
+  padding-left: ${props => (props.center ? "0" : "24px")};
   line-height: 64px;
-  text-align: ${props => (props.center ? 'center' : 'left')};
+  text-align: ${props => (props.center ? "center" : "left")};
   i {
-    padding-right: ${props => (props.center ? '0' : '8px')};
+    padding-right: ${props => (props.center ? "0" : "8px")};
   }
 `;
 
@@ -36,15 +36,15 @@ export default withRouter(props => {
 
   const { pathname } = location;
 
-  let selectedKey = 'home';
+  let selectedKey = "home";
   if (pathname.startsWith(`/list`)) {
-    selectedKey = 'list';
+    selectedKey = "list";
   }
   if (pathname.startsWith(`/user`)) {
-    selectedKey = 'user';
+    selectedKey = "user";
   }
   if (pathname.startsWith(`/test`)) {
-    selectedKey = 'test';
+    selectedKey = "test";
   }
 
   return (
@@ -57,7 +57,7 @@ export default withRouter(props => {
       >
         <Logo center={collapsed}>
           <Icon type="alipay-circle" />
-          {!collapsed && 'Smallfish'}
+          {!collapsed && "Smallfish"}
         </Logo>
         <Menu theme="dark" mode="inline" selectedKeys={[selectedKey]}>
           <Menu.Item key="home">
@@ -95,7 +95,7 @@ export default withRouter(props => {
       <Layout>
         <MHeader>
           <Icon
-            type={collapsed ? 'menu-unfold' : 'menu-fold'}
+            type={collapsed ? "menu-unfold" : "menu-fold"}
             onClick={() => setSollapsed(!collapsed)}
           />
         </MHeader>
